@@ -1,0 +1,7 @@
+FROM rust:latest
+
+COPY . .
+
+RUN cargo build --bin bot -r
+
+CMD ["./target/release/bot"]

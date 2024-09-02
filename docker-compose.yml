@@ -1,0 +1,23 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: redis_service
+    ports:
+      - "6379:6379"
+
+  bot:
+    # image: dawsh/sangchin-bot:latest
+    build:
+      dockerfile: Dockerfile.bot
+    depends_on:
+      - redis
+
+  webserver:
+    # image: dawsh/sangchin-ws:latest
+    build:
+      dockerfile: Dockerfile.webserver
+    depends_on:
+      - redis
+
+environment:
+  REDIS_ADDRESS: "redis://redis"
